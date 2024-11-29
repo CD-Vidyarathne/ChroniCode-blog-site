@@ -13,7 +13,7 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null);
 
     if (!captchaValue) {
       alert("Please complete the reCAPTCHA");
@@ -29,7 +29,7 @@ const Signup: React.FC = () => {
       });
 
       alert("Signup successful! Please login.");
-      navigate("/login");
+      navigate("/auth/login");
     } catch (err: any) {
       console.log(err);
       if (err.response && err.response.data && err.response.data.error) {
@@ -91,7 +91,7 @@ const Signup: React.FC = () => {
         <button type="submit" className="btn btn-primary mt-4">
           Signup
         </button>
-        <Link to="/login" className="mt-3 underline">
+        <Link to="/auth/login" className="mt-3 underline">
           Already have an account?
         </Link>
       </form>

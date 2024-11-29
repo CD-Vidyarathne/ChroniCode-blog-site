@@ -12,14 +12,15 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   allowedRoles = [],
 }) => {
   const token = localStorage.getItem("authToken");
+
   const { isAuthenticated, role } = useAuth();
 
   if (!isAuthenticated || !token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/login" />;
   }
 
   if (allowedRoles.length > 0 && !allowedRoles.includes(role)) {
-    return <Navigate to="/unauthorized" />;
+    return <Navigate to="/auth/unauthorized" />;
   }
 
   return <>{children}</>;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../config/api";
 import { Blog } from "../types/types";
 import SingleBlog from "../components/SingleBlog";
+import CreateBlog from "../components/CreateBlog";
 
 const BlogsPage: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -56,6 +57,7 @@ const BlogsPage: React.FC = () => {
       <p className="mt-4 text-gray-300">
         Explore all blogs written by our community.
       </p>
+      <CreateBlog />
 
       <div className="mt-8 space-y-6">
         {blogs.map((blog) => {

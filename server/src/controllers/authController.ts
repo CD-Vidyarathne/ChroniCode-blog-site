@@ -111,14 +111,13 @@ export const login = async (req: Request, res: Response) => {
       `User ${user.username} (${user.email}, ${user.role}) logged in successfully.`,
     );
 
-    res
-      .status(200)
-      .json({
-        token,
-        message: "Login successful",
-        role: user.role,
-        id: user.id,
-      });
+    res.status(200).json({
+      token,
+      message: "Login successful",
+      username: user.username,
+      role: user.role,
+      id: user.id,
+    });
   } catch (error: any) {
     logger.error(`Login failed: ${error.message}`);
     res.status(500).json({ error: "Login failed. Please try again later." });

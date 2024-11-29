@@ -1,11 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Button from "./Button";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, role, logout } = useAuth();
-  console.log(isAuthenticated, role);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/auth/login");
+  };
   return (
     <div className="navbar bg-base-100 px-4 shadow-md">
       <div className="flex-1">
@@ -30,7 +34,7 @@ const Navbar: React.FC = () => {
                 <Link to="/admin">Admin</Link>
               </li>
             )}
-            <Button className="btn-error ml-6" onClick={logout}>
+            <Button className="btn-error ml-6" onClick={handleLogout}>
               Logout
             </Button>
           </ul>

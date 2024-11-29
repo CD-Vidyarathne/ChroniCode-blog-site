@@ -21,7 +21,7 @@ export const getAllBlogs = async (req: Request, res: Response) => {
   try {
     const blogs = await Blog.findAll({
       include: [
-        { association: "author", attributes: ["username"] },
+        { association: "author", attributes: ["id", "username"] },
         {
           association: "comments",
           attributes: ["id", "content", "timestamp"],
@@ -51,7 +51,7 @@ export const getBlogById = async (req: Request, res: Response) => {
   try {
     const blog = await Blog.findByPk(id, {
       include: [
-        { association: "author", attributes: ["username"] },
+        { association: "author", attributes: ["id", "username"] },
         {
           association: "comments",
           attributes: ["id", "content", "timestamp"],

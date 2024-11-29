@@ -3,6 +3,17 @@ import User from "../models/user";
 import { Roles } from "../types/roles";
 import logger from "../utils/logger";
 
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    console.log("Here");
+    const users = await User.findAll();
+    res.status(200).json({ message: "Successfully fetched users", users });
+  } catch (error) {
+    logger.error(`Failed to fetch users: ${error}`);
+    res.status(500).json({ error: "Failed to fetch users." });
+  }
+};
+
 export const promoteUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
 

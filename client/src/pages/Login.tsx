@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -9,8 +9,14 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { login } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +34,17 @@ const Login: React.FC = () => {
         captchaToken: captchaValue,
       });
 
-      const { token, role, id } = response.data;
-      console.log(response.data);
+      const { token, username, role, id } = response.data;
       localStorage.setItem("authToken", token);
-      login(role, id);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          username,
+          role,
+          id,
+        }),
+      );
+      login(username, role, id);
       navigate("/");
     } catch (err: any) {
       if (err.response && err.response.data && err.response.data.error) {
@@ -76,7 +89,7 @@ const Login: React.FC = () => {
         <button type="submit" className="btn btn-primary mt-4">
           Login
         </button>
-        <Link to="/signup" className="mt-3 underline">
+        <Link to="/auth/signup" className="mt-3 underline">
           New Here ? Please Register.
         </Link>
       </form>

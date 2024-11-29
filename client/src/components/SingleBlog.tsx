@@ -81,16 +81,16 @@ const SingleBlog: React.FC<SingleBlogProps> = ({
               <div key={comment.id} className="border-t pt-2 mt-4">
                 <p className="text-md">{comment.content}</p>
                 <p className="text-gray-500 text-sm">{`${comment.author.username}, ${new Date(comment.timestamp).toLocaleString()}`}</p>
-                {role === "admin" ||
+                {(role === "admin" ||
                   role === "moderator" ||
-                  (id === comment.author.id && (
-                    <Button
-                      className="btn-error mt-4"
-                      onClick={() => handleDeleteComment(blog.id, comment.id)}
-                    >
-                      Delete Comment
-                    </Button>
-                  ))}
+                  id === comment.author.id) && (
+                  <Button
+                    className="btn-error mt-4"
+                    onClick={() => handleDeleteComment(blog.id, comment.id)}
+                  >
+                    Delete Comment
+                  </Button>
+                )}
               </div>
             ))
           ) : (

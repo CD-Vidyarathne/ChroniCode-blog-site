@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import api from "../config/api";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       const response = await api.post("/blogs", { title, content });
-      console.log(response.data);
-      // Redirect to the blogs page or update the state
+      window.location.reload();
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to create blog");
     }
