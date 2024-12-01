@@ -21,6 +21,6 @@ SQL injection. ```Sequelize``` ORM Library is used.
 2. Navigate into server folder ```cd ./server```
 3. Run npm install ```npm install```
 4. Run ```npm run dev``` ( You must have 8080 port available )
-5. 2. Navigate into client folder ```cd ./client```
+5. Navigate into client folder ```cd ./client```
 6. Run npm install ```npm install```
 7. Run ```npm run dev``` ( You must have 3001 port available )
